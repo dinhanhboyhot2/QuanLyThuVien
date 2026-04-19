@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/imgIconType"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_calendar" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/imgIconType"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NGUYỄN VĂN C"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvViolationDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trễ 12 ngày - 17/04/2026"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvFineAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="140.000 đ"
+                android:textColor="#FF0000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvActionCollect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu tiền"
+                android:textColor="#3F51B5"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

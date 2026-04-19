@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_total" android:title="Tổng quan" android:icon="@drawable/ic_home"/>
+    <item android:id="@+id/nav_kho" android:title="Kho sách" android:icon="@drawable/ic_book"/>
+    <item android:id="@+id/nav_docgia" android:title="Độc giả" android:icon="@drawable/ic_people"/>
+    <item android:id="@+id/nav_me" android:title="Cá nhân" android:icon="@drawable/ic_person"/>
+</menu>

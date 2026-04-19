@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavAdmin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:id="@+id/layoutHeaderAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvTitleAdmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ADMIN PANEL"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"/>
+                    <TextView
+                        android:id="@+id/tvSubtitleAdmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quản lý thư viện hệ thống"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivAdminAvatar"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_alignParentEnd="true"
+                    app:shapeAppearanceOverlay="@style/CircleImage"
+                    android:src="@drawable/ic_avatar"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/etAdminSearch"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_search_box"
+                android:hint="Tìm tên sách, tác giả, mã số..."
+                android:drawableStart="@android:drawable/ic_menu_search"
+                android:textColor="@android:color/black"
+                android:paddingStart="15dp"
+                android:textSize="14sp"
+                android:inputType="text"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/btnStatTotalBooks"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_blue_card"
+                    android:padding="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/icBookStat"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_book"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tvNewBooksToday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/bg_tag_light_blue"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="+5 hôm nay"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvTotalBooksCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.200"
+                            android:textColor="#FFF"
+                            android:textStyle="bold"
+                            android:textSize="22sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tổng đầu sách"
+                            android:textColor="#E0E0E0"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnStatPendingRequests"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_card_orange"
+                    android:padding="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_history"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/bg_tag_light_white"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="Cần xử lý"
+                        android:textColor="#FF8A65"
+                        android:textSize="11sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvPendingCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:textColor="#FFF"
+                            android:textStyle="bold"
+                            android:textSize="22sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yêu cầu"
+                            android:textColor="#F5F5F5"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <GridLayout
+                android:id="@+id/gridAdminMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:columnCount="4">
+
+                <LinearLayout
+                    android:id="@+id/btnThemSach"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:padding="15dp"
+                        android:background="@drawable/bg_icon_green_light"
+                        android:src="@drawable/ic_add"
+                        app:tint="#2E7D32" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thêm sách"
+                        android:textColor="#333"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnQuetMa"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:padding="15dp"
+                        android:background="@drawable/bg_icon_purple_light"
+                        android:src="@drawable/ic_card"
+                        app:tint="#7B1FA2" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quét mã"
+                        android:textColor="#333"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnQuaHan"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:padding="15dp"
+                        android:background="@drawable/bg_icon_red_light"
+                        android:src="@drawable/ic_warning"
+                        app:tint="#D32F2F" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quá hạn"
+                        android:textColor="#333"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnThongKe"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:padding="15dp"
+                        android:background="@drawable/bg_icon_gray_light"
+                        android:src="@drawable/ic_chart"
+                        app:tint="#455A64" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thống kê"
+                        android:textColor="#333"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+            </GridLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yêu cầu chờ duyệt"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#000"/>
+                <TextView
+                    android:id="@+id/tvSeeAllRequests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Xem tất cả"
+                    android:textColor="#3F51B5"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRequestsAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tin tức &amp; Sự kiện"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#000"/>
+                <TextView
+                    android:id="@+id/tvSeeAllNews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Xem tất cả"
+                    android:textColor="#3F51B5"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNewsAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_admin_menu"/>
+</RelativeLayout>
