@@ -7,7 +7,9 @@ plugins {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("com.microsoft.sqlserver:mssql-jdbc") // Driver SQL Server (NFR21)
+    implementation("com.microsoft.sqlserver:mssql-jdbc")
+
+    implementation("org.springframework.boot:spring-boot-starter-security")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 }

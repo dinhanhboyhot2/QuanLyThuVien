@@ -76,7 +76,7 @@
                 android:textColor="#000000" />
 
             <EditText
-                android:id="@+id/etStudentEmail"
+                android:id="@+id/etStudentNameLogin"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
