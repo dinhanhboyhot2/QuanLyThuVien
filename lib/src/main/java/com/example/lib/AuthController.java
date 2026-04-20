@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
-interface DocGiaRepository extends JpaRepository<DocGia, Integer> {
-    @Query(value = "SELECT * FROM tblDocGia WHERE sEmail = ?1 AND sMatKhau = ?2", nativeQuery = true)
-    Optional<DocGia> login(String email, String pass);
+interface DocGiaRepository extends JpaRepository<DocGia, String> {
+    @Query(value = "SELECT * FROM dbo.tbl_doc_gia WHERE sEmail = ?1 ", nativeQuery = true)
+    Optional<DocGia> login(String email);
 }
 
 @RestController
@@ -15,7 +15,7 @@ interface DocGiaRepository extends JpaRepository<DocGia, Integer> {
 public class AuthController {
     @Autowired DocGiaRepository repo;
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password) {
-        return repo.login(email, password).map(u -> "Chào " + u.sHoTen).orElse("Lỗi!");
+    public String login(@RequestParam String email/*, @RequestParam String password*/) {
+        return repo.login(email).map(u -> "Chào " + u.sHoTen).orElse("Lỗi!");
     }
 }
