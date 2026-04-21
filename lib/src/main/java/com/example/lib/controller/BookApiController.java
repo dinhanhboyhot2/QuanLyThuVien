@@ -6,10 +6,13 @@ import com.example.lib.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -42,5 +45,25 @@ public class BookApiController {
     @GetMapping("/all")
     public ResponseEntity<List<DauSach>> getAllBooks() {
         return ResponseEntity.ok(bookRepository.findAll());
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> addOrder(@RequestBody DauSach dauSach) {
+        try {
+            DauSach saved = bookRepository.save(dauSach);
+            return ResponseEntity.ok(Collections.singletonMap("status", "success"));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Collections.singletonMap("status", "error"));
+        }
+    }
+
+    @GetMapping("/trending")
+    public ResponseEntity<List<DauSach>> getTrendingBooks() {
+        List<DauSach> list = bookRepository.getTopBorrowedBooks();
+        if (list.isEmpty()) {
+            // Nếu chưa có dữ liệu mượn, lấy đại 10 cuốn mới nhất để tránh trống màn hình
+            list = bookRepository.findAll().stream().limit(10).toList();
+        }
+        return ResponseEntity.ok(list);
     }
 }

@@ -15,6 +15,26 @@ public class CuonSach {
 
     @SerializedName("iNamXuatBan")
     private int iNamXuatBan;
+    @SerializedName("sAnhBia")
+    private String sAnhBia;
+    @SerializedName("dNgayTao")
+    private String dNgayTao;
+
+    public void setdNgayTao(String sdNgayTao) {
+        this.dNgayTao = sdNgayTao;
+    }
+
+    public String getdNgayTao() {
+        return dNgayTao;
+    }
+
+    public String getsAnhBia() {
+        return sAnhBia;
+    }
+
+    public void setsAnhBia(String sAnhBia) {
+        this.sAnhBia = sAnhBia;
+    }
 
     public String getsMaDauSach() {
         return sMaDauSach;

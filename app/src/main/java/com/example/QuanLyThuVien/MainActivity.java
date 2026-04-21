@@ -12,13 +12,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.QuanLyThuVien.controller.BookController;
+import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.ui.BookAdapter;
 import com.example.QuanLyThuVien.ui.LoginActivity;
 import com.example.QuanLyThuVien.ui.SearchActivity;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
     private TextView tvGreeting;
+    private BookController bookController;
+    private RecyclerView rvRecommended;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         boolean isLoggedIn = pref.getBoolean("isLoggedIn", false);
+        String sVaiTro = pref.getString("role", "");
 
         if (!isLoggedIn) {
             redirectToLogin();
@@ -34,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_main);
 
         View mainView = findViewById(android.R.id.content);
         ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, insets) -> {
@@ -58,6 +68,38 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         }
+
+        bookController = new BookController();
+        rvRecommended = findViewById(R.id.rvRecommendedBooks);
+
+        // Cấu hình lướt ngang cho RecyclerView
+        rvRecommended.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        // Gọi API lấy dữ liệu
+        loadTrendingBooks();
+
+        // Xử lý nút "Xem tất cả"
+        findViewById(R.id.tvSeeAllBooks).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void loadTrendingBooks() {
+        bookController.getTrendingBooks(new BookController.BookListCallback() {
+            @Override
+            public void onReceived(List<CuonSach> books) {
+                // Tạo Adapter và gán vào RecyclerView
+                // Lưu ý: Bạn cần tạo BookAdapter tương tự như mình đã hướng dẫn ở phản hồi trước
+                BookAdapter adapter = new BookAdapter(books);
+                rvRecommended.setAdapter(adapter);
+            }
+
+            @Override
+            public void onError(String error) {
+                // Xử lý lỗi nếu cần
+            }
+        });
     }
 
     private void redirectToLogin() {

@@ -71,9 +71,9 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent;
 
                     // Điều hướng theo role
-                    if ("VT_DOCGIA".equalsIgnoreCase(role)) {
+                    if ("STUDENT".equalsIgnoreCase(role)) {
                         intent = new Intent(LoginActivity.this, MainActivity.class);
-                    } else if ("VT_ADMIN".equalsIgnoreCase(role) || "VT_THUTHU".equalsIgnoreCase(role)) {
+                    } else if ("LIBRARIAN".equalsIgnoreCase(role)) {
                         intent = new Intent(LoginActivity.this, AdminActivity.class);
                     } else {
                         Toast.makeText(LoginActivity.this, "Vai trò không hợp lệ!", Toast.LENGTH_SHORT).show();

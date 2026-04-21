@@ -1,5 +1,7 @@
 package com.example.QuanLyThuVien.ui;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +43,33 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         // 1. Ánh xạ dữ liệu văn bản
         holder.tvTitle.setText(sach.getsTenDauSach());
-
-        // Vì trong Model CuonSach chỉ có mã NXB, ta tạm hiển thị mã NXB thay cho tác giả
-        // hoặc bạn có thể cập nhật thêm field sTacGia vào Model nếu DB có trả về.
         holder.tvAuthor.setText("Nhà xuất bản: " + sach.getsMaNhaXuatBan());
 
-        // 2. Xử lý hình ảnh (Nếu bạn có URL ảnh từ Server, hãy dùng Glide hoặc Picasso)
-        // Hiện tại đang để mặc định theo src của bạn: @drawable/ic_book2
-        holder.imgBook.setImageResource(R.drawable.ic_book2);
+        // 2. Xử lý giải mã hình ảnh Base64
+        String base64String = sach.getsAnhBia();
+
+        if (base64String != null && !base64String.isEmpty()) {
+            try {
+                // Giải mã chuỗi Base64 thành mảng byte
+                byte[] decodedString = android.util.Base64.decode(base64String, android.util.Base64.DEFAULT);
+                // Chuyển mảng byte thành Bitmap
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                if (decodedByte != null) {
+                    holder.imgBook.setImageBitmap(decodedByte);
+                } else {
+                    // Nếu giải mã ra null (chuỗi không phải định dạng ảnh)
+                    holder.imgBook.setImageResource(R.drawable.ic_book2);
+                }
+            } catch (Exception e) {
+                // Nếu chuỗi không phải Base64 hợp lệ, Catch lỗi và hiện ảnh mặc định
+                e.printStackTrace();
+                holder.imgBook.setImageResource(R.drawable.ic_book2);
+            }
+        } else {
+            // Nếu chuỗi null hoặc rỗng
+            holder.imgBook.setImageResource(R.drawable.ic_book2);
+        }
 
         // 3. Xử lý sự kiện nút "Mượn ngay"
         holder.btnBorrow.setOnClickListener(v -> {

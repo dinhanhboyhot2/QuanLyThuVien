@@ -2,8 +2,10 @@ package com.example.lib.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +18,20 @@ public class DauSach {
     private int iNamXuatBan;
     private LocalDateTime dNgayTao;
     private LocalDateTime dNgayCapNhat;
+    private String sAnhBia;
+
+    @PrePersist
+    protected void onCreate() {
+        dNgayTao = LocalDateTime.now();
+    }
+
+    public void setsAnhBia(String sAnhBia) {
+        this.sAnhBia = sAnhBia;
+    }
+
+    public String getsAnhBia() {
+        return sAnhBia;
+    }
 
     public String getsMaDauSach() {
         return sMaDauSach;

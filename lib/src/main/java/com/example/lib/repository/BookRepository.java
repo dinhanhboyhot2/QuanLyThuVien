@@ -18,4 +18,13 @@ public interface BookRepository extends JpaRepository<DauSach, String> {
 
     // Lấy toàn bộ danh sách
     List<DauSach> findAll();
+
+    // Lấy Top 10 sách mượn nhiều nhất
+    @Query(value = "SELECT TOP 10 ds.* FROM tbl_dau_sach ds " +
+            "JOIN (SELECT sMaDauSach, COUNT(*) as CountMuon " +
+            "      FROM tbl_chi_tiet_phieu_muon GROUP BY sMaDauSach) mu " +
+            "ON ds.sMaDauSach = mu.sMaDauSach " +
+            "ORDER BY mu.CountMuon DESC", nativeQuery = true)
+    List<DauSach> getTopBorrowedBooks();
+
 }

@@ -3,6 +3,7 @@ package com.example.QuanLyThuVien.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,14 @@ public class AdminActivity extends AppCompatActivity {
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin);
+        // Ánh xạ nút Thêm sách từ XML (ID: btnThemSach)
+        LinearLayout btnThemSach = findViewById(R.id.btnThemSach);
+
+        // Thiết lập sự kiện click để chuyển màn hình
+        btnThemSach.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivity.this, AddBookActivity.class);
+            startActivity(intent);
+        });
 
         findViewById(R.id.ivAdminAvatar).setOnClickListener(v -> performLogout());
     }
