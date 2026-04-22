@@ -14,9 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.QuanLyThuVien.MainActivity;
 import com.example.QuanLyThuVien.R;
 import com.example.QuanLyThuVien.controller.BookController;
 import com.example.QuanLyThuVien.controller.SearchController;
@@ -36,6 +38,7 @@ public class SearchActivity extends AppCompatActivity {
     private BookController bookController;
     private RecyclerView rvRecommended;
     private TextView tvGreeting;
+    private AppCompatButton btnLichSu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         etSearchResults = findViewById(R.id.etSearch_Result);
         rvBooks = findViewById(R.id.rvBooks);
         tvGreeting = findViewById(R.id.tvGreeting);
+        btnLichSu = findViewById(R.id.btnDetailExtend);
 
         // 2. Thiết lập ban đầu (MẶC ĐỊNH LÀ TRANG CHỦ)
         layoutHome.setVisibility(View.VISIBLE);
@@ -132,6 +136,16 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.cvAvatar).setOnClickListener(v -> performLogout());
+
+        if (btnLichSu != null) {
+            btnLichSu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SearchActivity.this, SachDangMuonActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void performLogout() {
