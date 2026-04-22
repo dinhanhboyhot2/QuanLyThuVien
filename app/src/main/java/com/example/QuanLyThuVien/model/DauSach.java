@@ -2,7 +2,7 @@ package com.example.QuanLyThuVien.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CuonSach {
+public class DauSach {
 
     @SerializedName("sMaDauSach")
     private String sMaDauSach;

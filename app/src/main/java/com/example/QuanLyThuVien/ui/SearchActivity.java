@@ -17,11 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.QuanLyThuVien.MainActivity;
 import com.example.QuanLyThuVien.R;
 import com.example.QuanLyThuVien.controller.BookController;
 import com.example.QuanLyThuVien.controller.SearchController;
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -150,7 +149,7 @@ public class SearchActivity extends AppCompatActivity {
     private void loadTrendingBooks() {
         bookController.getTrendingBooks(new BookController.BookListCallback() {
             @Override
-            public void onReceived(List<CuonSach> books) {
+            public void onReceived(List<DauSach> books) {
                 // Tạo Adapter và gán vào RecyclerView
                 // Lưu ý: Bạn cần tạo BookAdapter tương tự như mình đã hướng dẫn ở phản hồi trước
                 BookAdapter adapter = new BookAdapter(books);
@@ -221,7 +220,7 @@ public class SearchActivity extends AppCompatActivity {
     private void performSearch(String sKeyword) {
         searchController.searchBook(sKeyword, new SearchController.SearchCallback() {
             @Override
-            public void onSuccess(List<CuonSach> listSach) {
+            public void onSuccess(List<DauSach> listSach) {
                 displaySearchResults(listSach);
             }
 
@@ -233,7 +232,7 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    public void displaySearchResults(List<CuonSach> listSach) {
+    public void displaySearchResults(List<DauSach> listSach) {
         if (listSach != null && bookAdapter != null) {
             bookAdapter.updateData(listSach);
         }
