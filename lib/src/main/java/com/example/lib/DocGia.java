@@ -1,20 +1,43 @@
 package com.example.lib;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_doc_gia")
 public class DocGia {
     @Id
-    @Column(name = "sMaDocGia") // ÉP CHÍNH XÁC TÊN CỘT LÀ iMaDG
+    @Column(name = "sMaDocGia")
     public String sMaDocGia;
 
-    @Column(name = "sEmail") // ÉP CHÍNH XÁC TÊN CỘT LÀ sEmail
+    @Column(name = "sHoTen")
+    public String sHoTen;
+
+    @Column(name = "iGioiTinh")
+    public Integer iGioiTinh;
+
+    @Column(name = "dNgaySinh")
+    public LocalDate dNgaySinh;
+
+    @Column(name = "sEmail")
     public String sEmail;
 
-//    @Column(name = "sMatKhau") // ÉP CHÍNH XÁC TÊN CỘT LÀ sMatKhau
-//    public String sMatKhau;
+    @Column(name = "sDienThoai")
+    public String sDienThoai;
 
-    @Column(name = "sHoTen") // ÉP CHÍNH XÁC TÊN CỘT LÀ sHoTen
-    public String sHoTen;
+    @Column(name = "sDiaChi1") // Thường trú
+    public String sDiaChi1;
+
+    @Column(name = "sDiaChi2") // Tạm trú
+    public String sDiaChi2;
+
+    @Column(name = "sMaLop")
+    public String sMaLop;
+
+    @Column(name = "dNgayTao", updatable = false)
+    public LocalDateTime dNgayTao;
+
+    @Column(name = "dNgayCapNhat")
+    public LocalDateTime dNgayCapNhat;
 }
