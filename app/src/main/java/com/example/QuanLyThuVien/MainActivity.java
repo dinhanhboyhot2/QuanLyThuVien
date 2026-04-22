@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.QuanLyThuVien.controller.BookController;
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 import com.example.QuanLyThuVien.ui.BookAdapter;
 import com.example.QuanLyThuVien.ui.LoginActivity;
 import com.example.QuanLyThuVien.ui.SearchActivity;
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadTrendingBooks() {
         bookController.getTrendingBooks(new BookController.BookListCallback() {
             @Override
-            public void onReceived(List<CuonSach> books) {
+            public void onReceived(List<DauSach> books) {
                 // Tạo Adapter và gán vào RecyclerView
                 // Lưu ý: Bạn cần tạo BookAdapter tương tự như mình đã hướng dẫn ở phản hồi trước
                 BookAdapter adapter = new BookAdapter(books);
