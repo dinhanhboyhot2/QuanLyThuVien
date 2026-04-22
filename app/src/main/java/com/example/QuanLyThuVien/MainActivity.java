@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         // 5. Các xử lý khác giữ nguyên [cite: 104-113]
         findViewById(R.id.cvAvatar).setOnClickListener(v -> performLogout());
 
-        EditText etSearch = findViewById(R.id.etSearch);
+
         // 3. Ánh xạ View
         btnLichSu = findViewById(R.id.btnDetailExtend);
         tvGreeting = findViewById(R.id.tvGreeting);
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         EditText etSearch = findViewById(R.id.etSearch);
 
         // 4. Hiển thị thông tin (Sử dụng biến cũ: username)
-        String username = pref.getString("username", "Người dùng");
+
         tvGreeting.setText("XIN CHÀO, " + username.toUpperCase() + " 👋");
 
         // 5. Cài đặt các sự kiện Click
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadTrendingBooks() {
         bookController.getTrendingBooks(new BookController.BookListCallback() {
             @Override
-            public void onReceived(List<CuonSach> books) {
+
 
             public void onReceived(List<DauSach> books) {
                 // Tạo Adapter và gán vào RecyclerView
