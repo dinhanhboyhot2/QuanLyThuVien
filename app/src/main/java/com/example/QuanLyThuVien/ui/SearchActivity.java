@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +22,7 @@ import com.example.QuanLyThuVien.MainActivity;
 import com.example.QuanLyThuVien.R;
 import com.example.QuanLyThuVien.controller.BookController;
 import com.example.QuanLyThuVien.controller.SearchController;
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class SearchActivity extends AppCompatActivity {
     private BookController bookController;
     private RecyclerView rvRecommended;
     private TextView tvGreeting;
+    private AppCompatButton btnLichSu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         etSearchResults = findViewById(R.id.etSearch_Result);
         rvBooks = findViewById(R.id.rvBooks);
         tvGreeting = findViewById(R.id.tvGreeting);
+        btnLichSu = findViewById(R.id.btnDetailExtend);
 
         // 2. Thiết lập ban đầu (MẶC ĐỊNH LÀ TRANG CHỦ)
         layoutHome.setVisibility(View.VISIBLE);
@@ -133,6 +136,16 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.cvAvatar).setOnClickListener(v -> performLogout());
+
+        if (btnLichSu != null) {
+            btnLichSu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SearchActivity.this, SachDangMuonActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void performLogout() {
@@ -150,7 +163,7 @@ public class SearchActivity extends AppCompatActivity {
     private void loadTrendingBooks() {
         bookController.getTrendingBooks(new BookController.BookListCallback() {
             @Override
-            public void onReceived(List<CuonSach> books) {
+            public void onReceived(List<DauSach> books) {
                 // Tạo Adapter và gán vào RecyclerView
                 // Lưu ý: Bạn cần tạo BookAdapter tương tự như mình đã hướng dẫn ở phản hồi trước
                 BookAdapter adapter = new BookAdapter(books);
@@ -221,7 +234,7 @@ public class SearchActivity extends AppCompatActivity {
     private void performSearch(String sKeyword) {
         searchController.searchBook(sKeyword, new SearchController.SearchCallback() {
             @Override
-            public void onSuccess(List<CuonSach> listSach) {
+            public void onSuccess(List<DauSach> listSach) {
                 displaySearchResults(listSach);
             }
 
@@ -233,7 +246,7 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    public void displaySearchResults(List<CuonSach> listSach) {
+    public void displaySearchResults(List<DauSach> listSach) {
         if (listSach != null && bookAdapter != null) {
             bookAdapter.updateData(listSach);
         }

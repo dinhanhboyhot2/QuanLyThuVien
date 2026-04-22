@@ -88,7 +88,8 @@
                 android:drawablePadding="10dp"
                 android:textSize="14sp"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text = "23A1001D0180"/>
 
             <TextView
                 android:id="@+id/tvLabelPassword"
@@ -111,7 +112,8 @@
                 android:drawableStart="@drawable/ic_lock"
                 android:drawablePadding="10dp"
                 android:inputType="textPassword"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:text = "mat_khau_ma_hoa_456"/>
 
             <RelativeLayout
                 android:id="@+id/layoutOptions"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/bg_blue_card"
+    android:elevation="4dp">
+
+    <TextView
+        android:id="@+id/tvTenSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:text="Tên sách" />
+
+    <TextView
+        android:id="@+id/tvNgayMuon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textSize="14sp"
+        android:textColor="#E3F2FD"
+        android:text="Ngày mượn: 21/04/2026" />
+
+    <TextView
+        android:id="@+id/tvNgayHenTra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:textColor="#E3F2FD"
+        android:text="Hẹn trả: 28/04/2026" />
+
+    <TextView
+        android:id="@+id/tvSoNgayConLai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="#FFF176"
+        android:text="Còn 7 ngày" />
+</LinearLayout>

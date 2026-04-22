@@ -1,7 +1,7 @@
 package com.example.QuanLyThuVien.controller;
 
 import com.example.QuanLyThuVien.api.ApiClient; // Import đúng package của ApiClient
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 import com.example.QuanLyThuVien.api.BookApiService;
 import java.util.List;
 import retrofit2.Call;
@@ -17,7 +17,7 @@ public class SearchController {
     }
 
     public void searchBook(String sKeyword, SearchCallback callback) {
-        Call<List<CuonSach>> call;
+        Call<List<DauSach>> call;
 
         // Nếu từ khóa trống hoặc chỉ có khoảng trắng -> Lấy toàn bộ
         if (sKeyword == null || sKeyword.trim().isEmpty()) {
@@ -27,9 +27,9 @@ public class SearchController {
             call = apiService.getBooksByKeyword(sKeyword.trim());
         }
 
-        call.enqueue(new Callback<List<CuonSach>>() {
+        call.enqueue(new Callback<List<DauSach>>() {
             @Override
-            public void onResponse(Call<List<CuonSach>> call, Response<List<CuonSach>> response) {
+            public void onResponse(Call<List<DauSach>> call, Response<List<DauSach>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
                 } else {
@@ -38,14 +38,14 @@ public class SearchController {
             }
 
             @Override
-            public void onFailure(Call<List<CuonSach>> call, Throwable t) {
+            public void onFailure(Call<List<DauSach>> call, Throwable t) {
                 callback.onError("Lỗi kết nối: " + t.getMessage());
             }
         });
     }
 
     public interface SearchCallback {
-        void onSuccess(List<CuonSach> listSach);
+        void onSuccess(List<DauSach> listSach);
         void onError(String sErrorMessage);
     }
 }

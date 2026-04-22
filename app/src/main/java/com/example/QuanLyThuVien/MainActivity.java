@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -17,10 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.QuanLyThuVien.controller.BookController;
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 import com.example.QuanLyThuVien.ui.BookAdapter;
 import com.example.QuanLyThuVien.ui.LoginActivity;
 import com.example.QuanLyThuVien.ui.ReaderDetailActivity; // ĐÃ THÊM IMPORT
+import com.example.QuanLyThuVien.ui.SachDangMuonActivity;
 import com.example.QuanLyThuVien.ui.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView; // ĐÃ THÊM IMPORT
 
@@ -28,6 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tvGreeting;
+    private AppCompatButton btnLichSu;
     private BookController bookController;
     private RecyclerView rvRecommended;
 
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // 2. Thiết lập giao diện (CHỈ GỌI 1 LẦN)
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
@@ -87,6 +91,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.cvAvatar).setOnClickListener(v -> performLogout());
 
         EditText etSearch = findViewById(R.id.etSearch);
+        // 3. Ánh xạ View
+        btnLichSu = findViewById(R.id.btnDetailExtend);
+        tvGreeting = findViewById(R.id.tvGreeting);
+        rvRecommended = findViewById(R.id.rvRecommendedBooks);
+        EditText etSearch = findViewById(R.id.etSearch);
+
+        // 4. Hiển thị thông tin (Sử dụng biến cũ: username)
+        String username = pref.getString("username", "Người dùng");
+        tvGreeting.setText("XIN CHÀO, " + username.toUpperCase() + " 👋");
+
+        // 5. Cài đặt các sự kiện Click
+        findViewById(R.id.cvAvatar).setOnClickListener(v -> performLogout());
+
         if (etSearch != null) {
             etSearch.setOnClickListener(v -> {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
@@ -104,12 +121,32 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
         });
+
+        // Xử lý nút mở màn hình Sách đang mượn
+        if (btnLichSu != null) {
+            btnLichSu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, SachDangMuonActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
+        // 6. Cấu hình RecyclerView
+        bookController = new BookController();
+        rvRecommended.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        loadTrendingBooks();
     }
 
     private void loadTrendingBooks() {
         bookController.getTrendingBooks(new BookController.BookListCallback() {
             @Override
             public void onReceived(List<CuonSach> books) {
+
+            public void onReceived(List<DauSach> books) {
+                // Tạo Adapter và gán vào RecyclerView
+                // Lưu ý: Bạn cần tạo BookAdapter tương tự như mình đã hướng dẫn ở phản hồi trước
                 BookAdapter adapter = new BookAdapter(books);
                 rvRecommended.setAdapter(adapter);
             }
@@ -117,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(String error) {
                 Toast.makeText(MainActivity.this, "Lỗi tải sách: " + error, Toast.LENGTH_SHORT).show();
+                // Xử lý lỗi
             }
         });
     }

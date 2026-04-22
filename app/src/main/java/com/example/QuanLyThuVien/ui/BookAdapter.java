@@ -11,19 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 import com.example.QuanLyThuVien.R;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
-    private List<CuonSach> listSach;
+    private List<DauSach> listSach;
 
-    public BookAdapter(List<CuonSach> listSach) {
+    public BookAdapter(List<DauSach> listSach) {
         this.listSach = listSach;
     }
 
-    public void updateData(List<CuonSach> newList) {
+    public void updateData(List<DauSach> newList) {
         this.listSach = newList;
         notifyDataSetChanged();
     }
@@ -38,7 +38,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        CuonSach sach = listSach.get(position);
+        DauSach sach = listSach.get(position);
         if (sach == null) return;
 
         // 1. Ánh xạ dữ liệu văn bản

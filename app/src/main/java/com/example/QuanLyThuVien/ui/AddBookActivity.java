@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.QuanLyThuVien.R;
 import com.example.QuanLyThuVien.controller.BookController;
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 
 public class AddBookActivity extends AppCompatActivity {
 
@@ -104,7 +104,7 @@ public class AddBookActivity extends AppCompatActivity {
     }
 
     private void handleSaveBook() {
-        CuonSach book = new CuonSach();
+        DauSach book = new DauSach();
         // 1. Lấy dữ liệu từ giao diện
         String tenSach = etBookName.getText().toString().trim();
         String maSach = etBookId.getText().toString().trim();

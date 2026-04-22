@@ -8,7 +8,7 @@ import android.util.Base64;
 
 import com.example.QuanLyThuVien.api.ApiClient;
 import com.example.QuanLyThuVien.api.BookApiService;
-import com.example.QuanLyThuVien.model.CuonSach;
+import com.example.QuanLyThuVien.model.DauSach;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -38,7 +38,7 @@ public class BookController {
     }
 
     // Gửi dữ liệu sách lên Server
-    public void insertBookData(Context context, CuonSach book, Uri imageUri, BookCallback callback) {
+    public void insertBookData(Context context, DauSach book, Uri imageUri, BookCallback callback) {
 
         // SỬA LỖI: Kiểm tra Uri trước khi chuyển đổi để tránh NullPointerException
         if (imageUri != null) {
@@ -88,9 +88,9 @@ public class BookController {
     }
 
     public void getTrendingBooks(BookListCallback callback) {
-        apiService.getTrendingBooks().enqueue(new Callback<List<CuonSach>>() {
+        apiService.getTrendingBooks().enqueue(new Callback<List<DauSach>>() {
             @Override
-            public void onResponse(Call<List<CuonSach>> call, Response<List<CuonSach>> response) {
+            public void onResponse(Call<List<DauSach>> call, Response<List<DauSach>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onReceived(response.body());
                 } else {
@@ -99,7 +99,7 @@ public class BookController {
             }
 
             @Override
-            public void onFailure(Call<List<CuonSach>> call, Throwable t) {
+            public void onFailure(Call<List<DauSach>> call, Throwable t) {
                 callback.onError(t.getMessage());
             }
         });
@@ -111,7 +111,7 @@ public class BookController {
     }
 
     public interface BookListCallback {
-        void onReceived(List<CuonSach> books);
+        void onReceived(List<DauSach> books);
         void onError(String error);
     }
 }
