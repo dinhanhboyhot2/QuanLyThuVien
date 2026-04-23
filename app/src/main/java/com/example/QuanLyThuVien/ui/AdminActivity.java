@@ -36,6 +36,11 @@ public class AdminActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        findViewById(R.id.btnThongKe).setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivity.this, PenaltyStatisticActivity.class);
+            startActivity(intent);
+        });
+
         findViewById(R.id.ivAdminAvatar).setOnClickListener(v -> performLogout());
     }
     private void redirectToLogin() {

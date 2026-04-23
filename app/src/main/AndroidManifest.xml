@@ -34,6 +34,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".ui.AdminActivity"/>
         <activity android:name=".ui.SearchActivity"/>
+        <activity android:name=".ui.PenaltyStatisticActivity"/>
         <activity
             android:name=".ui.AddBookActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
