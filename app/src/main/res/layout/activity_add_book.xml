@@ -71,7 +71,8 @@
             <EditText
                 android:id="@+id/etBookName"
                 style="@style/InputStyle"
-                android:hint="Nhập tên sách" />
+                android:hint="Nhập tên sách"
+                android:text ="Test1"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,7 +89,8 @@
                     <EditText
                         android:id="@+id/etAuthorName"
                         style="@style/InputStyle"
-                        android:hint="Nhập tên tác giả" />
+                        android:hint="Nhập tên tác giả"
+                        android:text ="Test1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -100,7 +102,8 @@
                     <EditText
                         android:id="@+id/etBookId"
                         style="@style/InputStyle"
-                        android:hint="Nhập mã sách" />
+                        android:hint="Nhập mã sách"
+                        android:text ="Test1"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -108,14 +111,16 @@
             <EditText
                 android:id="@+id/etCategory"
                 style="@style/InputStyle"
-                android:hint="Nhập thể loại" />
+                android:hint="Nhập thể loại"
+                android:text ="Test1"/>
 
             <TextView style="@style/LabelStyle" android:text="Số lượng" />
             <EditText
                 android:id="@+id/etQuantity"
                 style="@style/InputStyle"
                 android:hint="Nhập số lượng"
-                android:inputType="number" />
+                android:inputType="number"
+                android:text ="1"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,7 +137,8 @@
                     <EditText
                         android:id="@+id/etPublisher"
                         style="@style/InputStyle"
-                        android:hint="Nhập nhà xuất bản" />
+                        android:hint="Nhập nhà xuất bản"
+                        android:text ="NXB-BK"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -145,7 +151,8 @@
                         android:id="@+id/etPublishYear"
                         style="@style/InputStyle"
                         android:hint="Nhập năm xuất bản"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:text ="2026"/>
                 </LinearLayout>
             </LinearLayout>
 
