@@ -51,5 +51,13 @@ android {
         testImplementation(libs.junit)
         androidTestImplementation(libs.ext.junit)
         androidTestImplementation(libs.espresso.core)
+
+        // Unit Test
+        testImplementation ("junit:junit:4.13.2")
+        testImplementation ("org.mockito:mockito-core:5.11.0")
+
+        // Android Instrumentation Test (khuyên thêm)
+        androidTestImplementation ("androidx.test.ext:junit:1.2.1")
+        androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1")
     }
 

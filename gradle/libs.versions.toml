@@ -10,6 +10,7 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 # Thêm core-ktx để tránh nó tự nhảy lên bản 1.18.0 (đòi SDK 36)
 coreKtx = "1.15.0"
+junitJupiter = "5.14.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -21,6 +22,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 # Thêm dòng này để quản lý thằng core-ktx cứng đầu
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
