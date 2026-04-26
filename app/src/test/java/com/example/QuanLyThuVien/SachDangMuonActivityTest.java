@@ -5,7 +5,6 @@ import com.example.QuanLyThuVien.model.SachDangMuon;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,58 +21,50 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test cho chức năng tải danh sách sách đang mượn.
+ *
+ * Mục tiêu:
+ * - Kiểm tra phản hồi thành công có dữ liệu
+ * - Kiểm tra phản hồi thành công nhưng danh sách rỗng
+ * - Kiểm tra lỗi server HTTP
+ * - Kiểm tra lỗi mất kết nối mạng
+ *
+ * Sử dụng Mockito để giả lập Retrofit API và callback response.
+ */
 public class SachDangMuonActivityTest {
 
     private PhieuMuonApiService mockApi;
     private Call<List<SachDangMuon>> mockCall;
 
+    /**
+     * Khởi tạo mock object trước mỗi test case.
+     */
     @Before
     public void setUp() {
-        // Khởi tạo các đối tượng giả lập (Mock) trước mỗi lần chạy test
         mockApi = mock(PhieuMuonApiService.class);
         mockCall = mock(Call.class);
     }
 
-    // [Test Case 1.1] Gọi API thành công và có dữ liệu (2 cuốn sách)
+    /**
+     * TC1.1
+     * Kiểm tra API trả về thành công với 2 bản ghi.
+     *
+     * Kỳ vọng:
+     * - response thành công
+     * - body khác null
+     * - số lượng phần tử = 2
+     */
     @Test
     public void testTaiDuLieu_ThanhCong_CoDuLieu() {
-        // 1. Chuẩn bị Mock Data (Input)
         List<SachDangMuon> mockList = new ArrayList<>();
         mockList.add(new SachDangMuon());
         mockList.add(new SachDangMuon());
+
         Response<List<SachDangMuon>> mockResponse = Response.success(mockList);
 
         when(mockApi.layDanhSachSachDangMuon("DG001")).thenReturn(mockCall);
 
-        doAnswer(invocation -> {
-            Callback<List<SachDangMuon>> callback = invocation.getArgument(0);
-            callback.onResponse(mockCall, mockResponse); // Giả lập gọi onResponse
-            return null;
-        }).when(mockCall).enqueue(any(Callback.class));
-
-        // 2. Thực thi & 3. Kiểm tra (Assert)
-        mockCall.enqueue(new Callback<List<SachDangMuon>>() {
-            @Override
-            public void onResponse(Call<List<SachDangMuon>> call, Response<List<SachDangMuon>> response) {
-                assertTrue(response.isSuccessful());
-                assertNotNull(response.body());
-                assertEquals(2, response.body().size()); // Kỳ vọng mảng có 2 phần tử
-                System.out.println("Test 1.1 Passed: Nhận đúng 2 cuốn sách");
-            }
-            @Override
-            public void onFailure(Call<List<SachDangMuon>> call, Throwable t) {
-                fail("Không được nhảy vào onFailure ở test case này");
-            }
-        });
-    }
-
-    // [Test Case 1.2] Gọi API thành công nhưng mảng rỗng []
-    @Test
-    public void testTaiDuLieu_ThanhCong_MangRong() {
-        List<SachDangMuon> emptyList = new ArrayList<>();
-        Response<List<SachDangMuon>> mockResponse = Response.success(emptyList);
-
-        when(mockApi.layDanhSachSachDangMuon("DG002")).thenReturn(mockCall);
         doAnswer(invocation -> {
             Callback<List<SachDangMuon>> callback = invocation.getArgument(0);
             callback.onResponse(mockCall, mockResponse);
@@ -82,26 +73,80 @@ public class SachDangMuonActivityTest {
 
         mockCall.enqueue(new Callback<List<SachDangMuon>>() {
             @Override
-            public void onResponse(Call<List<SachDangMuon>> call, Response<List<SachDangMuon>> response) {
+            public void onResponse(Call<List<SachDangMuon>> call,
+                                   Response<List<SachDangMuon>> response) {
                 assertTrue(response.isSuccessful());
-                assertEquals(0, response.body().size()); // Kỳ vọng mảng có 0 phần tử
-                System.out.println("Test 1.2 Passed: Trả về mảng rỗng");
+                assertNotNull(response.body());
+                assertEquals(2, response.body().size());
+
+                System.out.println("TC1.1 Passed: Nhận đúng 2 cuốn sách");
             }
+
             @Override
             public void onFailure(Call<List<SachDangMuon>> call, Throwable t) {
-                fail();
+                fail("Không được gọi onFailure trong test case thành công");
             }
         });
     }
 
-    // [Test Case 1.3] Server báo lỗi 500 Internal Server Error
+    /**
+     * TC1.2
+     * Kiểm tra API trả về thành công nhưng danh sách rỗng.
+     *
+     * Kỳ vọng:
+     * - response thành công
+     * - số lượng phần tử = 0
+     */
+    @Test
+    public void testTaiDuLieu_ThanhCong_MangRong() {
+        List<SachDangMuon> emptyList = new ArrayList<>();
+        Response<List<SachDangMuon>> mockResponse = Response.success(emptyList);
+
+        when(mockApi.layDanhSachSachDangMuon("DG002")).thenReturn(mockCall);
+
+        doAnswer(invocation -> {
+            Callback<List<SachDangMuon>> callback = invocation.getArgument(0);
+            callback.onResponse(mockCall, mockResponse);
+            return null;
+        }).when(mockCall).enqueue(any(Callback.class));
+
+        mockCall.enqueue(new Callback<List<SachDangMuon>>() {
+            @Override
+            public void onResponse(Call<List<SachDangMuon>> call,
+                                   Response<List<SachDangMuon>> response) {
+                assertTrue(response.isSuccessful());
+                assertEquals(0, response.body().size());
+
+                System.out.println("TC1.2 Passed: Trả về danh sách rỗng");
+            }
+
+            @Override
+            public void onFailure(Call<List<SachDangMuon>> call, Throwable t) {
+                fail("Không được gọi onFailure");
+            }
+        });
+    }
+
+    /**
+     * TC1.3
+     * Kiểm tra trường hợp server trả về lỗi HTTP 500.
+     *
+     * Kỳ vọng:
+     * - response không thành công
+     * - mã lỗi = 500
+     */
     @Test
     public void testTaiDuLieu_LoiServer_HTTP500() {
-        // Giả lập Server lỗi 500
-        ResponseBody errorBody = ResponseBody.create(MediaType.parse("application/json"), "{\"Lỗi\":\"Server hỏng\"}");
-        Response<List<SachDangMuon>> errorResponse = Response.error(500, errorBody);
+        ResponseBody errorBody = ResponseBody.create(
+                MediaType.parse("application/json"),
+                "{\"Lỗi\":\"Server hỏng\"}"
+        );
+
+        Response<List<SachDangMuon>> errorResponse =
+                Response.error(500, errorBody);
 
         when(mockApi.layDanhSachSachDangMuon("DG001")).thenReturn(mockCall);
+
         doAnswer(invocation -> {
             Callback<List<SachDangMuon>> callback = invocation.getArgument(0);
             callback.onResponse(mockCall, errorResponse);
@@ -110,40 +155,55 @@ public class SachDangMuonActivityTest {
 
         mockCall.enqueue(new Callback<List<SachDangMuon>>() {
             @Override
-            public void onResponse(Call<List<SachDangMuon>> call, Response<List<SachDangMuon>> response) {
-                assertFalse(response.isSuccessful()); // isSuccessful() phải là false
+            public void onResponse(Call<List<SachDangMuon>> call,
+                                   Response<List<SachDangMuon>> response) {
+                assertFalse(response.isSuccessful());
                 assertEquals(500, response.code());
-                System.out.println("Test 1.3 Passed: Bắt được lỗi HTTP 500");
+
+                System.out.println("TC1.3 Passed: Bắt được lỗi HTTP 500");
             }
+
             @Override
             public void onFailure(Call<List<SachDangMuon>> call, Throwable t) {
-                fail();
+                fail("Không được gọi onFailure");
             }
         });
     }
 
-    // [Test Case 1.4] Mất mạng (Timeout/No Internet)
+    /**
+     * TC1.4
+     * Kiểm tra trường hợp mất kết nối mạng.
+     *
+     * Kỳ vọng:
+     * - callback onFailure được gọi
+     * - thông báo lỗi đúng
+     */
     @Test
     public void testTaiDuLieu_MatKetNoiMang() {
-        Throwable networkError = new java.net.UnknownHostException("Không có kết nối mạng");
+        Throwable networkError =
+                new java.net.UnknownHostException("Không có kết nối mạng");
 
         when(mockApi.layDanhSachSachDangMuon("DG001")).thenReturn(mockCall);
+
         doAnswer(invocation -> {
             Callback<List<SachDangMuon>> callback = invocation.getArgument(0);
-            callback.onFailure(mockCall, networkError); // Giả lập gọi trực tiếp vào onFailure
+            callback.onFailure(mockCall, networkError);
             return null;
         }).when(mockCall).enqueue(any(Callback.class));
 
         mockCall.enqueue(new Callback<List<SachDangMuon>>() {
             @Override
-            public void onResponse(Call<List<SachDangMuon>> call, Response<List<SachDangMuon>> response) {
-                fail("Bị mất mạng nên không thể vào onResponse");
+            public void onResponse(Call<List<SachDangMuon>> call,
+                                   Response<List<SachDangMuon>> response) {
+                fail("Mất mạng nên không được vào onResponse");
             }
+
             @Override
             public void onFailure(Call<List<SachDangMuon>> call, Throwable t) {
                 assertNotNull(t);
                 assertEquals("Không có kết nối mạng", t.getMessage());
-                System.out.println("Test 1.4 Passed: Bắt được ngoại lệ mất mạng");
+
+                System.out.println("TC1.4 Passed: Bắt được lỗi mất mạng");
             }
         });
     }

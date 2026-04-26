@@ -16,3 +16,6 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
